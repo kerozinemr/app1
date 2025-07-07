@@ -1,0 +1,19 @@
+<h1>Profile</h1>
+<span>Welcome!! {{user.guest.name}} </span><a href="{% url 'logout' %}">Logout</a>
+<img src= "{{user.guest.img.url}}" style='width:100px;'>
+
+<h3>{{user.guest.email}}</h3>
+<h3>{{user.guest.phone}}</h3>
+<div style="justify-self:flex-end;">
+    
+
+{{form.errors}}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{form.as_p}}
+
+
+<input type='submit' name='save'>
+</form>
+</div>

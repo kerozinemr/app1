@@ -1,0 +1,47 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+<body >
+  
+
+<div style="justify-content: center;">
+  <div>
+  <h3>Hello  {{user.username}} !!</h3>
+<img src= "{{user.guest.img.url}}" style='width:100px;'>
+
+  <a style="border-width:1px ;background-color:rgb(234, 231, 231);display: flex;justify-self:flex-end;-self:flex-end;border-radius: 1px; border-color: aqua;" href="{% url 'logout' %}">Logout</a><br><br>
+  </div>
+
+  <button type="submit"><a href="{% url 'create_task' %}">Create New Task</a></button><br><br>
+  
+
+  {% for Task in tasks %}
+  <div style="display: flex; align-items: center; margin-bottom: 10px;">
+    <div style="flex: 1;">
+      {{ Task.title }}
+    </div>
+    <div>
+      <a href="{% url 'update_task' Task.id %}" style="background-image:url(static/images/square.png);
+            background-size:cover;
+            border-radius: 15px;
+           
+            color: rgb(166, 213, 232);
+            padding: 3px 9px;
+            text-decoration: none;
+            margin-right: 5px;
+            background-color: rgb(255, 255, 255);
+            
+            
+            background-position:center;"></a>
+      <a href="{% url 'delete_task' Task.id %}" style="background-color: rgb(243, 85, 70); border-radius: 5px; border-width: 0px; color: whitesmoke; padding: 3px 9px; text-decoration: none;">Delete</a>
+    </div>
+  </div>
+{% endfor %}
+
+
+
+
+</div>
+</body>
+{% endblock  %}
+

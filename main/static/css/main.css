@@ -1,0 +1,11 @@
+body{
+    background-color: #0f0e0e;
+    color: aqua;
+}
+
+a{
+    text-decoration: none;
+}
+button{
+    padding-left: 12px;
+}

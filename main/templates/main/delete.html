@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+
+<p>Are You Sure You Want To Delete  <span style="color:red;background-color:white;border-radius:10px;">  {{item}} </span>  ? </p>
+<form action="{% url 'delete_task' item.id %}" method ='POST'>
+    {% csrf_token %}
+
+    <a href="{% url 'home' %}">Cancel</a>
+
+    <input type="submit" name="Confirm">
+
+</form>
+{% endblock  %}
