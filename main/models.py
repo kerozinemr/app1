@@ -4,12 +4,12 @@ from storages.backends.s3boto3 import S3Boto3Storage
 
 # Create your models here.
 class Guest(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,null = True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null = True,blank=True)
     name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    img = models.ImageField(storage=S3Boto3Storage(),null=True,upload_to='profile_images/')
+    img = models.ImageField(null=True,upload_to='main/static/images/')
     
     
     def __str__(self):

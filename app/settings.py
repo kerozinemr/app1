@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ['todo-app-1svn.onrender.com','127.0.0.1']
 
@@ -88,10 +88,11 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'mazz',
-        'PASSWORD':'mazz230026',
-        'HOST':'database-2.chc4k80a6skh.eu-north-1.rds.amazonaws.com',
+        'NAME': 'DEMO_TEST',
+        'USER': 'postgres',
+        'PASSWORD':'mazz2300',
+        #'HOST':'database-2.chc4k80a6skh.eu-north-1.rds.amazonaws.com',
+        'HOST':'localhost',
         'PORT': '5432',
     }
 }
