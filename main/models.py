@@ -9,20 +9,20 @@ class Guest(models.Model):
     email = models.EmailField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    img = models.ImageField(null=True,upload_to='main/static/images/')
+    img = models.ImageField(null=True,upload_to='main/static/images/',default='main/static/images/profile_pic.jpg')
     
     
     def __str__(self):
-        return self.name
+        return str(self.name)
     
 
 
 
 
 class Task(models.Model):
-    guest = models.ForeignKey(Guest, on_delete=models.CASCADE, null=True)
+    guest = models.ForeignKey(Guest, on_delete=models.CASCADE, null=False)
     title = models.CharField(max_length=200)
-    description = models.TextField(max_length=200)
+    description = models.TextField(max_length=200,blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     
     

@@ -21,8 +21,8 @@ def register(request):
             form.save()
             messages.success(request,'Welcome!')
             return redirect('login')
-        else:
-            messages.error(request,{messages.error})
+        
+            
         
         
     context = {'form':form,'message':messages}
@@ -39,7 +39,7 @@ def loginPage(request):
         user = authenticate(request,username=username,password=password)
         if user is not None:
             login(request, user)
-            messages.success(request,'Welcome!')
+            
             return redirect('home')
         
         
@@ -57,42 +57,17 @@ def logoutUser(request):
     return redirect('login') 
  
 
-#@login_required(login_url='login')
-#def profile(request):
- #   guest = request.user.guest
-  #  form = UpdateProfileForm(instance=guest)
-   # if request.method == 'POST':
-    #    form = UpdateProfileForm(request.POST, request.FILES, instance=guest)
-      #  if form.is_valid():
-       #     form.save()
-            
-    
-    #context = {'form':form}
-    
-    #return render(request,'main/profile.html',context)
-
-
 
 @login_required(login_url='login')
 def home(request):
-    guests = Guest.objects.all()
-    tasks = Task.objects.all()
-    
-    context = {'tasks':tasks, 'guests':guests}
+    guest = request.user.guest
+    tasks = Task.objects.filter(guest=guest)
+    context = {'tasks': tasks, 'guest': guest}
     return render(request, "main/home.html", context) 
  
  
  
  
-@login_required(login_url='login')
-def contact(request):
-    return render(request, "main/contact.html")
-
-
-
-@login_required(login_url='login')
-def about(request):
-    return render(request, "main/about.html")
 
 
 
@@ -100,7 +75,22 @@ def about(request):
 
 @login_required(login_url='login')
 def createTask(request):
+    guest = request.user.guest
     form = TaskForm()
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False,)
+            task.guest = guest
+            task.save()
+            return redirect('home')
+    context = {'form': form}
+    return render(request, 'main/task_form.html', context)
+
+@login_required(login_url='login')
+def UpdateTask(request):
+    task = Task.objects.get(id=id)
+    form = TaskForm(instance=task)
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
@@ -111,21 +101,9 @@ def createTask(request):
     return render(request, 'main/task_form.html',context)
 
 @login_required(login_url='login')
-def UpdateTask(request, pk):
-    task = Task.objects.get(id=pk)
-    form = TaskForm(instance=task)
-    if request.method == 'POST':
-        form = TaskForm(request.POST, instance=task)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
+def deleteTask(request):
     
-    context = {'form':form}
-    return render(request, 'main/task_form.html',context)
-
-@login_required(login_url='login')
-def deleteTask(request, pk):
-    task = Task.objects.get(id=pk)
+    task = Task.objects.get(id=id)
     if request.method == "POST":
         task.delete()
         return redirect('home')
@@ -150,13 +128,13 @@ def profile(request):
             try:
                 form.save()
                 print("Form saved successfully")
-                messages.success(request, 'Profile updated successfully!')
+                
             except Exception as e:
                 print(f"Error saving form: {e}")
-                messages.error(request, f'Error updating profile: {e}')
+                
         else:
             print("Form errors:", form.errors)
-            messages.error(request, 'Please correct the errors below.')
+            
     
     context = {'form': form}
     return render(request, 'main/profile.html', context)

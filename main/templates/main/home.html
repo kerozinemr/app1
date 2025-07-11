@@ -14,26 +14,16 @@
 
   <button type="submit"><a href="{% url 'create_task' %}">Create New Task</a></button><br><br>
   
-
-  {% for Task in tasks %}
+  
+  {% for task in tasks %}
   <div style="display: flex; align-items: center; margin-bottom: 10px;">
     <div style="flex: 1;">
-      {{ Task.title }}
+      {{task.title }}                  {{Task.date_created}}
+      {{user.guest.task.title}}   
     </div>
     <div>
-      <a href="{% url 'update_task' Task.id %}" style="background-image:url(static/images/square.png);
-            background-size:cover;
-            border-radius: 15px;
-           
-            color: rgb(166, 213, 232);
-            padding: 3px 9px;
-            text-decoration: none;
-            margin-right: 5px;
-            background-color: rgb(255, 255, 255);
-            
-            
-            background-position:center;"></a>
-      <a href="{% url 'delete_task' Task.id %}" style="background-color: rgb(243, 85, 70); border-radius: 5px; border-width: 0px; color: whitesmoke; padding: 3px 9px; text-decoration: none;">Delete</a>
+      
+      <a href="{% url 'delete_task' task.id %}" style="background-color: rgb(243, 85, 70); border-radius: 5px; border-width: 0px; color: whitesmoke; padding: 3px 9px; text-decoration: none;">Delete</a>
     </div>
   </div>
 {% endfor %}

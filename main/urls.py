@@ -10,8 +10,7 @@ urlpatterns = [
     
     path('profile/',views.profile, name="profile"), 
     path('',views.home, name='home'),
-    path('About/',views.about),
-    path('Contact/',views.contact),
+    
     
     path('create_task/',views.createTask,name="create_task"),
     path('update_task/<str:pk>/',views.UpdateTask,name="update_task"),
