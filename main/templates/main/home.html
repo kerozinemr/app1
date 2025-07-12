@@ -22,7 +22,7 @@
       {{user.guest.task.title}}   
     </div>
     <div>
-      
+      <a href="{% url 'update_task' task.id %}" style=" border-radius: 5px; border-width: 0px; color: whitesmoke; padding: 3px 9px; text-decoration: none;"><img style="width: 20px;height: 20px;" src="/static/images/edit.png" alt="edit">Edit</a>
       <a href="{% url 'delete_task' task.id %}" style="background-color: rgb(243, 85, 70); border-radius: 5px; border-width: 0px; color: whitesmoke; padding: 3px 9px; text-decoration: none;">Delete</a>
     </div>
   </div>

@@ -9,7 +9,7 @@ class Guest(models.Model):
     email = models.EmailField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    img = models.ImageField(null=True,upload_to='main/static/images/',default='main/static/images/profile_pic.jpg')
+    img = models.ImageField(null=True,storage=S3Boto3Storage(),default='main/static/images/profile_pic.jpg',upload_to='profile_images/')
     
     
     def __str__(self):
